@@ -4,7 +4,7 @@ A hotel
 
 # Running Locally
 
-Use MariaDB or MySQL and create a database `credit`. Grant all privileges to `maria` identified by `maria`, or change `application.properties` accordingly.
+Use MariaDB or MySQL and create a database `hotel`. Grant all privileges to `maria` identified by `maria`, or change `application.properties` accordingly.
 
 ```
 CREATE DATABASE hotel;
@@ -75,6 +75,9 @@ curl -v -X GET -H "Content-Type: application/json" "http://localhost:8080/invent
 
 ```
 
+### Testing
+- Integration tests use an in-memory database `H2`
+- Functional tests use Mockito
 
 # 4
 
@@ -102,3 +105,8 @@ JSON - Standard messaging format for clients. See `curl` examples above for outp
 ```
 
 - OAuth use another API to authenticate users. Not implemented in this API.
+
+NOTE: Not yet working so it's in another branch, ran out of time! :-)
+
+https://github.com/janderson100github/GildedRose/tree/Authentication
+
