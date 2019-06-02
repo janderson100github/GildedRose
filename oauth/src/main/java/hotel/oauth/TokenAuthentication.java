@@ -5,8 +5,8 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.security.auth.Subject;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TokenAuthentication extends AbstractAuthenticationToken {
 
@@ -15,7 +15,7 @@ public class TokenAuthentication extends AbstractAuthenticationToken {
     }
 
     public static TokenAuthentication anonymous() {
-        return new TokenAuthentication(Collections.emptyList());
+        return new TokenAuthentication(Arrays.asList(generateGrantedAuthority(Role.ANONYMOUS)));
     }
 
     @Override
@@ -48,14 +48,29 @@ public class TokenAuthentication extends AbstractAuthenticationToken {
     }
 
     public static TokenAuthentication fromTokenData(final TokenData tokenData) {
+        List<Role> roles = getRoles(tokenData);
+        return new TokenAuthentication(generateGrantedAuthorities(roles));
+    }
+
+    private static List<GrantedAuthority> generateGrantedAuthorities(final List<Role> roles) {
+        return roles.stream()
+                .map(TokenAuthentication::generateGrantedAuthority)
+                .collect(Collectors.toList());
+    }
+
+    private static GrantedAuthority generateGrantedAuthority(final Role role) {
+        return new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return Role.USER.name();
+            }
+        };
+    }
+
+    private static List<Role> getRoles(final TokenData tokenData) {
         if (tokenData.isUser()) {
-            return new TokenAuthentication(Arrays.asList(new GrantedAuthority() {
-                @Override
-                public String getAuthority() {
-                    return "USER";
-                }
-            }));
+            return Arrays.asList(Role.ANONYMOUS, Role.USER);
         }
-        return new TokenAuthentication(Collections.emptyList());
+        return Arrays.asList(Role.ANONYMOUS);
     }
 }

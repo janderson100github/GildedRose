@@ -9,7 +9,8 @@ public class TokenData {
     }
 
     public TokenData(final String role) {
-        if ("USER".equals(role)) {
+        if (Role.USER.name()
+                .equals(role)) {
             this.isUser = true;
         }
     }
