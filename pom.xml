@@ -22,6 +22,7 @@
         <module>core</module>
         <module>client-model</module>
         <module>db</module>
+        <module>oauth</module>
     </modules>
 
     <properties>

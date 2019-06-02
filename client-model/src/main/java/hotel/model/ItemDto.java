@@ -3,6 +3,7 @@ package hotel.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,6 +18,7 @@ public class ItemDto implements Serializable {
     private Date created;
 
     @JsonProperty("name")
+    @NotEmpty
     private String name;
 
     @JsonProperty("description")
