@@ -56,7 +56,7 @@ public class ItemService {
         return itemRepository.countByCreatedAfter(date);
     }
 
-    public ItemDto createPool(final ItemDto itemDto) {
+    public ItemDto createItem(final ItemDto itemDto) {
         Item item = itemRepository.saveAndFlush(itemDtoTransformer.generate(itemDto));
         return itemDtoTransformer.generate(item);
     }

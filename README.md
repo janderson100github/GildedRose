@@ -4,6 +4,26 @@ A hotel reservation application exercise.
 
 # Running Locally
 
+`mvn clean package -DskipTests`
+
+Run the application: `HotelApiApplication.java` in your IDE or as a .jar
+
+```
+java -jar application-0.0.1-SNAPSHOT.jar
+```
+
+
+#### In-Memory H2
+
+Default: Nothing to do
+
+`application.properties` connection as:
+```
+spring.hotel.datasource.jdbc-url=jdbc:h2:mem:hotel
+
+```
+
+#### Optional to MySQL
 Use MariaDB or MySQL and create a database `hotel`. Grant all privileges to `maria` identified by `maria`, or change `application.properties` accordingly.
 
 ```
@@ -14,17 +34,23 @@ FLUSH PRIVILEGES;
 
 ```
 
-
-`mvn clean package -DskipTests`
-
-Run the application: `HotelApiApplication.java` in your IDE or as a .jar
+Update `application.properties`
 
 ```
-java -jar application-0.0.1-SNAPSHOT.jar
+spring.hotel.datasource.jdbc-url=jdbc:mysql://127.0.0.1:3306/hotel?characterEncoding=UTF-8
+
 ```
 
-[http://localhost:8080]()
+And remove `application/pom.xml` dependency:
 
+```
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+</dependency>
+
+```
 
 #### Item
 
@@ -146,3 +172,6 @@ JSON - Standard messaging format for clients. See `curl` examples above for outp
 Note: `123` is the special token for authenticating with role `USER` else user
 is `ANONYMOUS`
 
+- A Filter is used `OAuthFilter.java` to determine the roles a request will have.
+It calls `AuthenticationService.java` which would call another API or by some other means
+validate and determine the roles. 

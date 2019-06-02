@@ -56,7 +56,7 @@ public class ItemServiceTest {
     }
 
     @Test
-    public void createPool() {
+    public void createItem() {
         // TODO
     }
 

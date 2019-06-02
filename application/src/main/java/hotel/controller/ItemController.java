@@ -33,12 +33,12 @@ public class ItemController extends AbstractRestController {
     @RequestMapping(method = RequestMethod.POST,
                     consumes = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('USER')")
-    public ResponseEntity<ItemDto> createPool(
+    public ResponseEntity<ItemDto> createItem(
             @Valid
             @RequestBody
             final ItemDto itemDto) {
         validateItemDto(itemDto);
-        ItemDto savedItemDto = itemService.createPool(itemDto);
+        ItemDto savedItemDto = itemService.createItem(itemDto);
         return ResponseEntity.ok(savedItemDto);
     }
 
