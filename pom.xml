@@ -38,7 +38,7 @@
 
         <javax.cache.cache-api.version>1.0.0</javax.cache.cache-api.version>
         <ehcache.version>3.2.2</ehcache.version>
-        <json-path.version>2.2.0</json-path.version>
+        <json-path.version>2.9.0</json-path.version>
         <logstash-logback.version>4.11</logstash-logback.version>
         <logback.version>1.2.3</logback.version>
 
